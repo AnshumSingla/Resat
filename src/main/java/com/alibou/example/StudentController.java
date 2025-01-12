@@ -17,22 +17,27 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public Student post(
-            @RequestBody StudentDto student
+    public StudentResponseDto post(
+            @RequestBody StudentDto dto
     ) {
-        return repository.save(toStudent(student));
+        var student = toStudent(dto);
+        var savedStudent = repository.save(student);
+        return toStudentResponseDto(savedStudent);
     }
 
     private Student toStudent(StudentDto dto) {
         var student = new Student();
-        student.setFirstName(dto.firstname());
-        student.setLastName(dto.lastname());
+        student.setFirstName(dto.firstName());
+        student.setLastName(dto.lastName());
         student.setEmail(dto.email());
-        student.setAge(dto.age());
         var school = new School();
         school.setId(dto.schoolId());
         student.setSchool(school);
         return student;
+    }
+
+    private StudentResponseDto toStudentResponseDto(Student student) {
+        return new StudentResponseDto(student.getFirstName(), student.getLastName(), student.getEmail());
     }
 
     @GetMapping("/students")

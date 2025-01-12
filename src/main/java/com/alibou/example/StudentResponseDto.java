@@ -1,9 +1,8 @@
 package com.alibou.example;
 
-public record StudentDto(
+public record StudentResponseDto(
         String firstName,
         String lastName,
-        String email,
-        Integer schoolId
+        String email
 ) {
 }
