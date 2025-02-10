@@ -1,5 +1,6 @@
-package com.alibou.example;
+package com.alibou.example.School;
 
+import com.alibou.example.Student.StudentMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class SchoolService {
 
     public SchoolDto create( SchoolDto schoolDto) {
         var school = schoolMapper.toSchool(schoolDto);
-        var savedSchool =  schoolRepository.save(school);
+        schoolRepository.save(school);
         return schoolDto;
     }
 

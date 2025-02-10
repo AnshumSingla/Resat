@@ -1,9 +1,15 @@
-package com.alibou.example;
+package com.alibou.example.Student;
 
 //import com.alibou.example.practice.Order;
 //import com.alibou.example.practice.OrderRecord;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -17,7 +23,7 @@ public class StudentController {
 
     @PostMapping("/students")
     public StudentResponseDto saveStudent(
-            @RequestBody StudentDto dto
+            @Valid @RequestBody StudentDto dto
     ) {
         return this.studentService.saveStudent(dto);
     }
@@ -46,5 +52,18 @@ public class StudentController {
             @PathVariable("student-id") Integer id
     ){
         this.studentService.deleteStudentById(id);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException exp
+    ){
+        var errors = new HashMap<String, String>();
+        exp.getBindingResult().getAllErrors().forEach(error -> {
+            var fieldName = ((FieldError)error).getField();
+            var errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

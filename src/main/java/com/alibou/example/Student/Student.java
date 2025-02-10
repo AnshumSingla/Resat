@@ -1,5 +1,7 @@
-package com.alibou.example;
+package com.alibou.example.Student;
 
+import com.alibou.example.School.School;
+import com.alibou.example.StudentProfile.StudentProfile;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 

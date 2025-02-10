@@ -1,5 +1,6 @@
-package com.alibou.example;
+package com.alibou.example.StudentProfile;
 
+import com.alibou.example.Student.Student;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,4 +1,4 @@
-package com.alibou.example;
+package com.alibou.example.School;
 
 import org.springframework.stereotype.Service;
 
