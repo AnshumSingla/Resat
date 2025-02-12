@@ -16,7 +16,7 @@ public class SchoolService {
         this.schoolMapper = schoolMapper;
     }
 
-    public SchoolDto create( SchoolDto schoolDto) {
+    public SchoolDto create(SchoolDto schoolDto) {
         var school = schoolMapper.toSchool(schoolDto);
         schoolRepository.save(school);
         return schoolDto;

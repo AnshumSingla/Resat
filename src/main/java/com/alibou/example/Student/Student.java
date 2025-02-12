@@ -30,7 +30,7 @@ public class Student {
     @JoinColumn(
             name = "school_id"
     )
-    @JsonBackReference
+    @JsonBackReference //To avoid infinite referencing
     private School school;
 
     public Student() {
